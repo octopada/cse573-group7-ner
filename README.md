@@ -3,3 +3,6 @@
 ## Required python modules
 `flask` \
 `flask-cors`
+
+## To run
+`py app.py`
