@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>CSE 573 - Group 7 - NER</title>
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src='https://d3js.org/d3.v5.min.js'></script>
+    <script src='js/main.js'></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+<header class="text-center" style="padding: 15px; margin: 2px; background: whitesmoke;">
+    <h3> CSE 573 - Group 7 - NER Classification</h3>
+</header>
+
+<div class="text-center">
+    <br>
+    <label for="classifyTexts">Enter sentence(s):</label> <br/>
+    <textarea id="classifyTexts" name="classifyTexts" rows="1" cols="100"></textarea>
+    <br><br>
+    <label for="modelSelect">Choose a model:</label>
+    <select id="modelSelect" name="modelSelect">
+        <option value="bert">BERT</option>
+        <option value="bilstm">BiLSTM-CRF+ELMo</option>
+        <option value="xweigh">CrossWeigh + Flair</option>
+        <option value="ensembling">Model Ensembling (combines above 3)</option>
+    </select>
+    <br>
+    <label for="modSelect">Choose a modifying technique:</label>
+    <select id="modSelect" name="modSelect">
+        <option value="none">None</option>
+        <option value="pseudo">Pseudo Labeling</option>
+        <option value="smooth">Label Smoothing</option>
+        <option value="precision">Mixed Precision Training</option>
+    </select>
+    <br><br>
+    <input type="submit" value="Submit" onclick="nerClassify()">
+</div>
+<svg id="classifiedTextSVG"></svg>
+</body>
+
+</html>
