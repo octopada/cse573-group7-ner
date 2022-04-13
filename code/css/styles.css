@@ -1,0 +1,15 @@
+#classifiedTextSVG {
+    border:1px solid gray;
+    border-radius:10px;
+    height:500px;
+    width:1600px;
+    margin:20px;
+}
+
+html {
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+h2, h3 {
+    text-align:center;
+}

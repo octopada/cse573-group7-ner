@@ -4,6 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <title>CSE 573 - Group 7 - NER</title>
+    <link rel='stylesheet' href='css/styles.css'>
     <link rel="stylesheet" type="text/css"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src='https://d3js.org/d3.v5.min.js'></script>
@@ -41,8 +42,10 @@
     </select>
     <br><br>
     <input type="submit" value="Submit" onclick="nerClassify()">
+    <br><br><br>
+    Output:
+    <svg id="classifiedTextSVG"></svg>
 </div>
-<svg id="classifiedTextSVG"></svg>
 </body>
 
 </html>
