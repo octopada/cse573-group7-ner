@@ -1,6 +1,9 @@
 let svg;
 let width, height;
 
+let tooltipDiv;
+const toolTipOffset = {left: 120, top: 345};
+
 let baseX = 16;
 let baseY = 48;
 let currX = 16;
@@ -11,6 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
     svg = d3.select("#classifiedTextSVG");
     width = +svg.style('width').replace('px', '');
     height = +svg.style('height').replace('px', '');
+
+    tooltipDiv = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 });
 
 function nerClassify() {
@@ -90,7 +97,19 @@ function nerClassify() {
             .join('text')
             .attr('x', d => d.x)
             .attr('y', d => d.y)
-            .text(d => d.word);
+            .text(d => d.word)
+            .on('mouseover', function (d) {
+                tooltipDiv.html("Tag: " + d.tag + " - " + resolveTag(d.tag))
+                    .style("opacity", 1)
+                    .style("background", getHighlightColor(d.tag));
+            })
+            .on('mousemove', function (d) {
+                tooltipDiv.style("left", (d.x + d.bbox.width + toolTipOffset.left) + "px")
+                    .style("top", (d.y + d.bbox.height + toolTipOffset.top) + "px");
+            })
+            .on('mouseout', function () {
+                tooltipDiv.style("opacity", 0);
+            });
 
         svg.selectAll("text")
             .each(function (d) {
@@ -108,6 +127,21 @@ function nerClassify() {
                 return `translate(-${xMargin}, -${d.bbox.height * 0.8 + yMargin})`
             });
     });
+}
+
+function resolveTag(tag) {
+    switch (tag) {
+        case 'PER':
+            return 'Person';
+        case 'ORG':
+            return 'Organization';
+        case 'LOC':
+            return 'Location';
+        case 'MISC':
+            return 'Miscellaneous Name';
+        case 'O':
+            return 'Other';
+    }
 }
 
 function getHighlightColor(tag) {
